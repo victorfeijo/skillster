@@ -1,39 +1,59 @@
 import * as React from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
-import { Container, Button, Text } from 'native-base';
-
-const instructions = Platform.select({
-  ios: "Press Cmd+R to reload,\n" + "Cmd+D or shake for dev menu",
-  android:
-    "Double tap R on your keyboard to reload,\n" +
-    "Shake or press menu button for dev menu"
-});
+import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text } from 'native-base';
 
 export default class App extends React.Component<{}, {}> {
+  state = {
+    show: false
+  }
+
+  changeShow = () => {
+    this.setState({ show: !this.state.show });
+  }
+
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome From TypeScript!</Text>
-        <Container>
-          <Button>
-            <Text>
-               Button
-            </Text>
-          </Button>
-        </Container>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-      </View>
+      <Container>
+        <Header>
+          <Left>
+            <Button transparent>
+              <Icon type='FontAwesome' name='home' />
+            </Button>
+          </Left>
+        <Body>
+          <Title>Header</Title>
+        </Body>
+        <Right />
+        </Header>
+        <Content>
+          <Text style={styles.welcome}>Hello test!</Text>
+          <View style={styles.button}>
+            <Button onPress={this.changeShow}>
+              <Icon name='heart' />
+              <Text style={styles.welcome}>
+                text
+              </Text>
+            </Button>
+          </View>
+          { this.state.show &&
+            <Text> show up :) </Text>
+          }
+        </Content>
+        <Footer>
+          <FooterTab>
+            <Button full>
+              <Text>Footer</Text>
+            </Button>
+          </FooterTab>
+        </Footer>
+      </Container>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#F5FCFF"
+  button: {
+    alignSelf: 'center'
   },
   welcome: {
     fontSize: 20,
