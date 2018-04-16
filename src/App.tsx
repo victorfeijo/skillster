@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
+import { Container, Button, Text } from 'native-base';
 
 const instructions = Platform.select({
   ios: "Press Cmd+R to reload,\n" + "Cmd+D or shake for dev menu",
@@ -13,6 +14,13 @@ export default class App extends React.Component<{}, {}> {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>Welcome From TypeScript!</Text>
+        <Container>
+          <Button>
+            <Text>
+               Button
+            </Text>
+          </Button>
+        </Container>
         <Text style={styles.instructions}>To get started, edit App.js</Text>
         <Text style={styles.instructions}>{instructions}</Text>
       </View>
