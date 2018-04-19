@@ -8,6 +8,8 @@ import foo from '../reducers';
 import * as actions from '../actions/index';
 import { StoreState } from '../types';
 
+import HomeScreen from '../components/HomeScreen';
+
 function mapStateToProps({ foo }: StoreState) {
   return {
     foo,
@@ -21,33 +23,17 @@ function mapDispatchToProps(dispatch: Dispatch<actions.FooAction>) {
   };
 }
 
-export interface Props {
-  foo?: number;
-  onIncrement?: () => void;
-}
-
-class HomeContainer extends React.Component<Props, {}> {
+class HomeContainer extends React.Component<{}, {}> {
   render() {
     return (
       <Container>
-        <Header>
-          <Left>
-            <Button transparent={true}>
-              <Icon type="FontAwesome" name="home" />
-            </Button>
-          </Left>
-          <Body>
-            <Title>Header</Title>
-          </Body>
-          <Right />
-        </Header>
         <Content>
           <Text style={styles.welcome}>Hello test!</Text>
           <View style={styles.button}>
-            <Button onPress={this.props.onIncrement}>
+            <Button onPress={() => this.props.navigation.navigate("Trains")}>
               <Icon name="heart" />
               <Text style={styles.welcome}>
-                text
+                new train
               </Text>
             </Button>
           </View>
@@ -80,5 +66,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 });
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);
