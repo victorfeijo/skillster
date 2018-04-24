@@ -6,7 +6,7 @@ export interface Props {
   navigation?: object;
 }
 
-export default class AppHeader extends React.Component<Props, {}> {
+class AppHeader extends React.Component<Props, {}> {
   render() {
     return (
       <Header>
@@ -23,3 +23,5 @@ export default class AppHeader extends React.Component<Props, {}> {
     );
   }
 }
+
+export default AppHeader;
