@@ -3,7 +3,6 @@ import { Platform, StyleSheet, View } from "react-native";
 import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text, Fab } from "native-base";
 
 import { Provider, Dispatch, connect } from 'react-redux';
-import { createStore } from 'redux';
 import foo from '../reducers';
 import * as actions from '../actions/index';
 import { StoreState } from '../types';

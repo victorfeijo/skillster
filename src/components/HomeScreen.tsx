@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Platform, StyleSheet, View } from "react-native";
-import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text } from "native-base";
 
 import AppHeader from '../components/AppHeader';
 import HomeContainer from '../containers/HomeContainer';
@@ -19,9 +18,14 @@ class HomeScreen extends React.Component<Props, {}> {
 }
 
 HomeScreen.navigationOptions = ({ navigation }) => {
+  const onNavPress = () => null;
+
   return {
     header: (
-      <AppHeader navigation={navigation} title="Trains" />
+      <AppHeader
+        title="Trains"
+        onButtonPress={onNavPress}
+      />
     ),
   };
 };

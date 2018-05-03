@@ -7,13 +7,17 @@ interface Props {
 }
 
 class TrainsFab extends React.Component<Props, {}> {
+  navigateToTrains = () => {
+    this.props.navigation.navigate('NewTrain');
+  }
+
   render() {
     return (
       <View style={{ flex: 1 }}>
         <Fab
           style={{ backgroundColor: '#5067FF' }}
           position="bottomRight"
-          onPress={() => this.props.navigation.navigate("Trains")}
+          onPress={this.navigateToTrains}
         >
           <Icon name="add" type="MaterialIcons" />
         </Fab>

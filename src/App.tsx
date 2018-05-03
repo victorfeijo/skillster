@@ -4,7 +4,7 @@ import { createStore } from 'redux';
 import { StackNavigator } from 'react-navigation';
 
 import HomeScreen from './components/HomeScreen';
-import TrainsScreen from './components/TrainsScreen';
+import NewTrainScreen from './components/NewTrainScreen';
 import foo from './reducers';
 import { StoreState } from './types';
 
@@ -12,7 +12,7 @@ const store = createStore<StoreState>(foo, { foo: 0 });
 
 const RootStack = StackNavigator({
   Home: { screen: HomeScreen },
-  Trains: { screen: TrainsScreen },
+  NewTrain: { screen: NewTrainScreen },
   initialRouteName: 'Home',
 });
 

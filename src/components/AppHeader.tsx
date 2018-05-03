@@ -3,20 +3,30 @@ import { Header, Title, Button, Left, Right, Body, Icon, Text } from "native-bas
 
 export interface Props {
   title: string;
-  navigation?: object;
+  icon?: string;
+  onButtonPress(event: any);
 }
 
 class AppHeader extends React.Component<Props, {}> {
+  public static defaultProps: Partial<Props> = {
+    icon: 'bars',
+  };
+
   render() {
+    const { title, icon, onButtonPress } = this.props;
+
     return (
       <Header>
         <Left>
-          <Button transparent={true}>
-            <Icon type="FontAwesome" name="bars" />
+          <Button
+            onPress={onButtonPress}
+            transparent={true}
+          >
+            <Icon type="FontAwesome" name={icon} />
           </Button>
         </Left>
         <Body>
-          <Title>{this.props.title}</Title>
+          <Title>{title}</Title>
         </Body>
         <Right />
       </Header>
