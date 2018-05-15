@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { remove } from 'ramda';
+import { remove, curry } from 'ramda';
 import { Platform, StyleSheet, View } from 'react-native';
 import { Icon, Button, Content, Card, CardItem, Body, Text, Form, Item, Label, Input } from 'native-base';
 
@@ -41,7 +41,7 @@ class NewTrainContainer extends React.Component<{}, {}> {
     this.setState({ name: value });
   }
 
-  removeIdxTask = (idx: number) => (
+  removeTask = (idx: number) => (
     () => {
       const { tasks } = this.state;
 
@@ -51,25 +51,34 @@ class NewTrainContainer extends React.Component<{}, {}> {
     }
   )
 
-  onChangeIdxTaskName = (idx: number) => (
-    (text: string) => {
-      const { tasks } = this.state;
-      tasks[idx].name = text;
+  onChangeTaskName = (idx: number, text: string) => {
+    const { tasks } = this.state;
+    tasks[idx].name = text;
 
-      this.setState({ tasks });
-    }
-  )
+    this.setState({ tasks });
+  }
+
+  onChangeTaskTries = (idx: number, text: string) => {
+    const { tasks } = this.state;
+    tasks[idx].tries = text;
+
+    this.setState({ tasks });
+  }
+
+  addNewTask = () => {
+    this.setState({ tasks: [...this.state.tasks, { name: '', tries: ''}] });
+  }
 
   renderTaskForm = (task: object, idx: number) => (
     <Card key={idx}>
-      <Button style={styles.closeBtn} transparent={true} danger={true} onPress={this.removeIdxTask(idx)}>
+      <Button style={styles.closeBtn} transparent={true} danger={true} onPress={curry(this.removeTask)(idx)}>
         <Icon type="FontAwesome" name="close" />
       </Button>
 
       <CardItem>
         <Item floatingLabel={true}>
           <Label>Task name</Label>
-          <Input onChangeText={this.onChangeIdxTaskName(idx)} value={this.state.tasks[idx].name} />
+          <Input onChangeText={curry(this.onChangeTaskName)(idx)} value={this.state.tasks[idx].name} />
         </Item>
       </CardItem>
 
@@ -81,10 +90,6 @@ class NewTrainContainer extends React.Component<{}, {}> {
       </CardItem>
     </Card>
   )
-
-  addNewTask = () => {
-    this.setState({ tasks: [...this.state.tasks, { name: '', tries: ''}] });
-  }
 
   render() {
     return (
