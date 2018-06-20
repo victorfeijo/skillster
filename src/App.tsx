@@ -5,10 +5,10 @@ import { StackNavigator } from 'react-navigation';
 
 import HomeScreen from './components/HomeScreen';
 import NewTrainScreen from './components/NewTrainScreen';
-import foo from './reducers';
+import reducers from './reducers';
 import { StoreState } from './types';
 
-const store = createStore<StoreState>(foo, { foo: 0 });
+const store = createStore<StoreState>(reducers);
 
 const RootStack = StackNavigator({
   Home: { screen: HomeScreen },

@@ -1,3 +1,3 @@
 export interface StoreState {
-  foo: number;
+  newTrain: object;
 }

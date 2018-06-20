@@ -1,3 +1,4 @@
+import { createAction } from 'redux-actions';
 import * as constants from '../constants';
 
 export interface IncrementFoo {
@@ -10,11 +11,7 @@ export interface DecrementFoo {
 
 export type FooAction = IncrementFoo | DecrementFoo;
 
-export function incrementFoo(): IncrementFoo {
-  return {
-    type: constants.INCREMENT_FOO,
-  };
-}
+export const incrementFoo = createAction(constants.INCREMENT_FOO);
 
 export function decrementFoo(): DecrementFoo {
   return {

@@ -8,18 +8,13 @@ import foo from '../reducers';
 import * as actions from '../actions/index';
 import { StoreState } from '../types';
 
-function mapStateToProps({ foo }: StoreState) {
-  return {
-    foo,
-  };
+function mapStateToProps(state: StoreState) {
+  return state;
 }
 
-function mapDispatchToProps(dispatch: Dispatch<actions.FooAction>) {
-  return {
-    onDecrement: () => dispatch(actions.decrementFoo()),
-    onIncrement: () => dispatch(actions.incrementFoo()),
-  };
-}
+const mapDispatchToProps = {
+  onIncrement: actions.incrementFoo,
+};
 
 const styles = StyleSheet.create({
   closeBtn: {
@@ -43,6 +38,9 @@ class NewTrainContainer extends React.Component<{}, {}> {
 
   removeTask = (idx: number) => (
     () => {
+      console.log(this.props);
+      this.props.onIncrement();
+
       const { tasks } = this.state;
 
       if (tasks.length > 1) {
