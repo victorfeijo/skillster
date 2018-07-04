@@ -1,25 +1,35 @@
 import * as React from 'react';
 import { remove, curry } from 'ramda';
 import { Platform, StyleSheet, View } from 'react-native';
-import { Icon, Button, Content, Card, CardItem, Body, Text, Form, Item, Label, Input } from 'native-base';
+import { Icon, Button, Content, Card, CardItem, Body, Text, Form, Item, Label, Input, Grid, Row, Col, View } from 'native-base';
 
 import { Provider, Dispatch, connect } from 'react-redux';
 import foo from '../reducers';
-import * as actions from '../actions/index';
+import actions from '../actions/index';
 import { StoreState } from '../types';
 
 function mapStateToProps(state: StoreState) {
-  return state;
+  return state.trains.form;
 }
 
 const mapDispatchToProps = {
-  onIncrement: actions.incrementFoo,
+  ...actions.trains,
 };
 
 const styles = StyleSheet.create({
+  bottomBtns: {
+    justifyContent: 'space-between',
+    marginLeft: 2,
+    marginRight: 2,
+    marginTop: 12,
+  },
   closeBtn: {
     alignSelf: 'flex-end',
-    padding: 10,
+  },
+  content: {
+    marginBottom: 12,
+    marginLeft: 12,
+    marginRight: 12,
   },
 });
 
@@ -38,9 +48,6 @@ class NewTrainContainer extends React.Component<{}, {}> {
 
   removeTask = (idx: number) => (
     () => {
-      console.log(this.props);
-      this.props.onIncrement();
-
       const { tasks } = this.state;
 
       if (tasks.length > 1) {
@@ -67,8 +74,13 @@ class NewTrainContainer extends React.Component<{}, {}> {
     this.setState({ tasks: [...this.state.tasks, { name: '', tries: ''}] });
   }
 
+  onSaveNewTrain = () => {
+    this.props.saveNewTrain(this.state);
+    this.props.navigation.navigate('Home');
+  }
+
   renderTaskForm = (task: object, idx: number) => (
-    <Card key={idx}>
+    <Card key={idx} style={{ marginTop: 12 }}>
       <Button style={styles.closeBtn} transparent={true} danger={true} onPress={curry(this.removeTask)(idx)}>
         <Icon type="FontAwesome" name="close" />
       </Button>
@@ -92,17 +104,27 @@ class NewTrainContainer extends React.Component<{}, {}> {
   render() {
     return (
       <Content>
-        <Form>
+        <Form style={styles.content}>
           <Item floatingLabel={true}>
             <Label>Train name</Label>
             <Input value={this.state.name} onChangeText={this.onChangeName} />
           </Item>
 
-          {this.state.tasks.map((task, idx) => this.renderTaskForm(task, idx))}
+          <View style={styles.taskForm}>
+            {this.state.tasks.map((task, idx) => this.renderTaskForm(task, idx))}
+          </View>
 
-          <Button bordered={true} success={true} onPress={this.addNewTask}>
-            <Text>Add Task</Text>
-          </Button>
+          <Grid>
+            <Row style={styles.bottomBtns}>
+              <Button bordered={true} success={true} onPress={this.addNewTask}>
+                <Text>Add Task</Text>
+              </Button>
+
+              <Button onPress={this.onSaveNewTrain}>
+                <Text>Save</Text>
+              </Button>
+            </Row>
+          </Grid>
         </Form>
       </Content>
     );
