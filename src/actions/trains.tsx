@@ -19,3 +19,13 @@ export const saveNewTrain = (train) => {
     }
   };
 };
+
+export const getTrains = () => (
+  async (dispatch, getState) => {
+    dispatch(createAction(c.GET_TRAINS)());
+
+    const persistedTrains = JSON.parse(await AsyncStorage.getItem('@trains'));
+
+    dispatch(createAction(c.GET_TRAINS_DONE)(persistedTrains));
+  }
+);

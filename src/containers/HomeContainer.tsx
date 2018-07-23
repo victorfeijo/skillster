@@ -2,9 +2,9 @@ import * as React from "react";
 import { Platform, StyleSheet, View } from "react-native";
 import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text, Fab } from "native-base";
 
-import { Provider, Dispatch, connect } from 'react-redux';
+import { connect } from 'react-redux';
 import foo from '../reducers';
-import * as actions from '../actions/index';
+import actions from '../actions/index';
 import { StoreState } from '../types';
 
 import AppFooter from '../components/AppFooter';
@@ -12,18 +12,13 @@ import HomeScreen from '../components/HomeScreen';
 import TrainsFab from '../components/TrainsFab';
 import TrainsList from '../components/TrainsList';
 
-function mapStateToProps({ foo }: StoreState) {
-  return {
-    foo,
-  };
+function mapStateToProps(state: StoreState) {
+  return state.trains;
 }
 
-function mapDispatchToProps(dispatch: Dispatch<actions.FooAction>) {
-  return {
-    onDecrement: () => dispatch(actions.decrementFoo()),
-    onIncrement: () => dispatch(actions.incrementFoo()),
-  };
-}
+const mapDispatchToProps = {
+  ...actions.trains,
+};
 
 class HomeContainer extends React.Component<{}, {}> {
   render() {

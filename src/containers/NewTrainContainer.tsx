@@ -3,7 +3,7 @@ import { remove, curry } from 'ramda';
 import { Platform, StyleSheet, View } from 'react-native';
 import { Icon, Button, Content, Card, CardItem, Body, Text, Form, Item, Label, Input, Grid, Row, Col, View } from 'native-base';
 
-import { Provider, Dispatch, connect } from 'react-redux';
+import { connect } from 'react-redux';
 import foo from '../reducers';
 import actions from '../actions/index';
 import { StoreState } from '../types';

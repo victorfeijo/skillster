@@ -15,6 +15,17 @@ const trains = combineReducers({
       [c.SAVE_NEW_TRAIN_DONE]: (state: object, { payload }): object => payload,
     }, {}),
   }),
+
+  list: combineReducers({
+    loading: handleActions({
+      [c.GET_TRAINS]: (state: boolean): boolean => true,
+      [c.GET_TRAINS_DONE]: (state: boolean): boolean => false,
+    }, false),
+    data: handleActions({
+      [c.GET_TRAINS]: (state: boolean, { payload }): object[] => [],
+      [c.GET_TRAINS_DONE]: (state: boolean, { payload }): object[] => payload,
+    }, []),
+  }),
 });
 
 export default trains;
