@@ -1,32 +1,36 @@
 import * as React from "react";
 import { List, ListItem, View, Content, Text } from "native-base";
+import { ScrollView } from "react-native"
 
 interface Props {
-  navigation?: object;
+  list: {
+    data: object[];
+    loading: boolean;
+  };
 }
 
 class TrainsList extends React.Component<Props, {}> {
-  componentWillMount = () => {
+  componentWillMount() {
     this.props.getTrains();
   }
 
-  render() {
-    console.log(this.props.list.data);
+  onClickTrain = (train) => () => (
+    console.log(train)
+  )
 
+  renderList = () => (
+    this.props.list.data.map((train) => (
+      <ListItem button={true} onPress={this.onClickTrain(train)}>
+        <Text>{train.name || 'Sem nome'}</Text>
+      </ListItem>
+    ))
+  )
+
+  render() {
     return (
-      <Content>
-        { this.props.list.loading ? (
-        <Text>Carregando...</Text>
-        ) : (
-        <List>
-          { this.props.list.data.map((train => (
-          <ListItem>
-            <Text>{train.name || 'Sem nome'}</Text>
-          </ListItem>
-          )))}
-        </List>
-        )}
-      </Content>
+      <ScrollView style={{ width: '100%', height: '100%' }}>
+        {this.props.list.loading ? (<Text>Carregando...</Text>) : this.renderList()}
+      </ScrollView>
     );
   }
 }
