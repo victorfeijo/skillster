@@ -1,10 +1,10 @@
+import { Container } from "native-base";
 import * as React from "react";
 import { Platform, StyleSheet, View } from "react-native";
-import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text, Fab } from "native-base";
-
 import { connect } from 'react-redux';
-import foo from '../reducers';
+
 import actions from '../actions/index';
+import foo from '../reducers';
 import { StoreState } from '../types';
 
 import AppFooter from '../components/AppFooter';

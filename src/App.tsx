@@ -1,11 +1,12 @@
 import * as React from "react";
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
 import { StackNavigator } from 'react-navigation';
+import { Provider } from 'react-redux';
+import { applyMiddleware, createStore } from 'redux';
+import thunk from 'redux-thunk';
 
 import HomeScreen from './components/HomeScreen';
 import NewTrainScreen from './components/NewTrainScreen';
+import TrainScreen from './components/TrainScreen';
 import reducers from './reducers';
 import { StoreState } from './types';
 
@@ -17,6 +18,7 @@ const store = createStore<StoreState>(
 const RootStack = StackNavigator({
   Home: { screen: HomeScreen },
   NewTrain: { screen: NewTrainScreen },
+  Train: { screen: TrainScreen },
   initialRouteName: 'Home',
 });
 

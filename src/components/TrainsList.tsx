@@ -1,12 +1,13 @@
 import * as React from "react";
 import { List, ListItem, View, Content, Text } from "native-base";
-import { ScrollView } from "react-native"
+import { ScrollView } from "react-native";
 
 interface Props {
   list: {
     data: object[];
     loading: boolean;
   };
+  getTrains: () => void;
 }
 
 class TrainsList extends React.Component<Props, {}> {
@@ -28,7 +29,7 @@ class TrainsList extends React.Component<Props, {}> {
 
   render() {
     return (
-      <ScrollView style={{ width: '100%', height: '100%' }}>
+      <ScrollView style={{ width: '100%', height: '100%', backgroundColor: 'white' }}>
         {this.props.list.loading ? (<Text>Carregando...</Text>) : this.renderList()}
       </ScrollView>
     );
